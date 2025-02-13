@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Trzecie Walentynki</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Ogólne ustawienia */
+    body {
+      background-color: #e2afff;
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #333;
+    }
+    /* Kontener całej sekcji */
+    .heart-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    /* Kontenery tekstowe z białym tłem, paddingiem i marginesami */
+    .text-container {
+      background: white;
+      padding: 20px;
+      margin: 20px 10px;
+      border-radius: 10px;
+    }
+    .text-container h1,
+    .text-container h2 {
+      margin: 0;
+    }
+    /* Powiększony kontener serca */
+    .heart-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 60px auto; /* większy odstęp od tekstów */
+    }
+    /* Powiększone, symetryczne serce */
+    .heart {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      animation: beat 1s infinite;
+    }
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 60px;
+      height: 96px;
+      background: red;
+      border-radius: 60px 60px 0 0;
+    }
+    .heart:before {
+      left: 60px;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+    .heart:after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+    @keyframes beat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+    }
+    /* Particles umieszczone za sercem */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: yellow;
+      border-radius: 50%;
+      animation: particleBurst 1s infinite;
+    }
+    @keyframes particleBurst {
+      0% {
+        transform: translate(0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty));
+        opacity: 0;
+      }
+    }
+    /* Ustawienia dla 8 particles */
+    .particle:nth-child(1) {
+      --tx: -30px;
+      --ty: -30px;
+      animation-delay: 0s;
+    }
+    .particle:nth-child(2) {
+      --tx: 30px;
+      --ty: -30px;
+      animation-delay: 0.1s;
+    }
+    .particle:nth-child(3) {
+      --tx: 40px;
+      --ty: 0;
+      animation-delay: 0.2s;
+    }
+    .particle:nth-child(4) {
+      --tx: 30px;
+      --ty: 30px;
+      animation-delay: 0.3s;
+    }
+    .particle:nth-child(5) {
+      --tx: -30px;
+      --ty: 30px;
+      animation-delay: 0.4s;
+    }
+    .particle:nth-child(6) {
+      --tx: -40px;
+      --ty: 0;
+      animation-delay: 0.5s;
+    }
+    .particle:nth-child(7) {
+      --tx: 0;
+      --ty: -40px;
+      animation-delay: 0.6s;
+    }
+    .particle:nth-child(8) {
+      --tx: 0;
+      --ty: 40px;
+      animation-delay: 0.7s;
+    }
+    /* Podpisy pod zdjęciami – biały background, różowy border, zaokrąglone rogi, wyśrodkowane */
+    .caption {
+      background-color: white;
+      border: 2px solid #f79acb;
+      border-radius: 8px;
+      padding: 5px 10px;
+      display: inline-block;
+      margin: 10px auto;
+      text-align: center;
+      color: black;
+    }
+    /* Wyśrodkowanie checkboxa wraz z etykietą */
+    .field .control .checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* Wyśrodkowanie przycisków – dodatkowy container */
+    .button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    /* Responsywność – zmniejszenie paddingu dla mniejszych ekranów */
+    @media (max-width: 600px) {
+      .heart-wrapper {
+        width: 100px;
+        height: 100px;
+      }
+      .heart {
+        width: 100px;
+        height: 100px;
+      }
+      .heart:before,
+      .heart:after {
+        width: 50px;
+        height: 80px;
+      }
+      .heart:before {
+        left: 50px;
+      }
+    }
+    /* Dodatkowe kontenery tekstowe */
+    .text-container {
+      max-width: 90%;
+      margin: 0 auto;
+      color: #3c096c;
+    }
+    /* Różowy button, analogiczny do formularza */
+    .button.is-primary {
+      background-color: #f79acb !important;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      color: white !important;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-container">
+    <div class="text-container">
+      <h1>
+        To już nasze trzecie walentynki. Choć nie spędzamy 14 lutego razem,
+        wiedz, że sercem jestem zawsze przy Tobie.
+      </h1>
+    </div>
+    <div class="heart-wrapper">
+      <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+      </div>
+      <div class="heart"></div>
+    </div>
+    <div class="text-container">
+      <h2>Twój na zawsze, Krzysztof</h2>
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="button is-primary" onclick="window.location.href='animacja.html';">
+      Coś dla Ciebie! (Kliknij mnie)
+    </button>
+  </div>
+</body>
+</html>

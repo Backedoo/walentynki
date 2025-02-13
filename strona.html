@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Walentynka</title>
+  <style>
+    /* Ustawienia ogólne */
+    body {
+      background-color: #e2afff;
+      color: white;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-weight: bold; /* Cały tekst pogrubiony */
+    }
+    /* Kontener z minimalnymi odstępami między elementami */
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;  /* Mniejszy odstęp między obrazkiem a dolną sekcją */
+      padding: 20px;
+    }
+    /* Górna część – obrazek */
+    #top {
+      width: 100%;
+      text-align: center;
+    }
+    /* Dolna część – nagłówek i przyciski */
+    #bottom {
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    /* Stylizacja przycisków */
+    button {
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    #takButton {
+      background-color: green;
+      margin-top: 20px;
+    }
+    #nieButton {
+      background-color: red;
+      margin-top: 20px;
+    }
+    /* Ukryte elementy, które pojawią się po kliknięciu "TAK" */
+    #message {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      display: none;
+    }
+    #nextPageLink {
+      display: none;
+      margin-top: 10px;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Górna część z obrazkiem (podmień "your-image.gif" na właściwy plik lub URL) -->
+    <div id="top">
+      <img src="misiek.gif" alt="Obraz walentynkowy" style="max-width:100%; height:auto;">
+    </div>
+    <!-- Dolna część z nagłówkiem i przyciskami -->
+    <div id="bottom">
+      <h1>Zostaniesz moją walentynką, skarbie?</h1>
+      <button id="takButton">TAK</button>
+      <button id="nieButton">NIE!</button>
+      <!-- Wiadomość i link, które pojawią się po kliknięciu "TAK" -->
+      <div id="message">Super! Ale wiedz, że to nie wszystko!!</div>
+      <a id="nextPageLink" href="nextpage.html">Przejdź do następnej strony</a>
+    </div>
+  </div>
+  
+  <script>
+    const nieButton = document.getElementById('nieButton');
+    const takButton = document.getElementById('takButton');
+    const messageDiv = document.getElementById('message');
+    const nextPageLink = document.getElementById('nextPageLink');
+    const topImg = document.querySelector("#top img");
+    const header = document.querySelector("h1");
+
+    // Skale dla animacji przycisków
+    let scaleNie = 1;
+    let scaleTak = 1;
+    // Lista wiadomości dla przycisku "NIE"
+    const nieMessages = ["Jesteś pewna?", "Na pewno?", "JESTEŚ 100 SURE?", "NIE DAJ SIĘ PROSIĆ!"];
+    let messageIndex = 0;
+
+    nieButton.addEventListener('click', function() {
+      // Aktualizacja tekstu przycisku "NIE"
+      if (messageIndex < nieMessages.length) {
+        nieButton.textContent = nieMessages[messageIndex];
+        messageIndex++;
+      } else {
+        nieButton.style.display = 'none';
+      }
+      // Zmniejszenie przycisku "NIE" i zwiększenie przycisku "TAK"
+      scaleNie *= 0.8;
+      scaleTak *= 1.1;
+      nieButton.style.transform = 'scale(' + scaleNie + ')';
+      takButton.style.transform = 'scale(' + scaleTak + ')';
+      // Aktualizacja przezroczystości przycisku "NIE"
+      nieButton.style.opacity = scaleNie;
+      // Gdy przycisk "NIE" jest zbyt mały, zostaje ukryty
+      if (scaleNie < 0.1) {
+        nieButton.style.display = 'none';
+      }
+    });
+
+    // Obsługa kliknięcia przycisku "TAK"
+    takButton.addEventListener('click', function() {
+      messageDiv.style.display = 'block';
+      nextPageLink.style.display = 'block';
+      // Zamiana gifa na drugi (podmień "your-second-image.gif" na właściwy plik lub URL)
+      topImg.src = "misiek2.gif";
+      // Usunięcie nagłówka z pytaniem
+      header.style.display = "none";
+    });
+  </script>
+</body>
+</html>

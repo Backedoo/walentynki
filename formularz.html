@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kocham Cię!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <style>
+      /* Całe tło strony ustawione na fioletowy */
+      html,
+      body {
+        background-color: #e2afff;
+        color: white;
+      }
+      #top {
+        margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+      /* Różowe przyciski – override dla Bulmy */
+      .button.is-primary,
+      .button.is-danger {
+        background-color: #f79acb !important;
+        border: none;
+        color: white !important;
+      }
+      .title {
+        color: #3c096c;
+        text-align: center;
+      }
+      /* Etap wyboru daty – białe tło z zaokrąglonym borderem */
+      #step1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #f79acb;
+        border-radius: 10px;
+        padding: 40px;
+        max-width: 600px;
+        margin: 40px auto;
+      }
+      #step1 input[type="date"].input {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #ccc;
+      }
+      /* Zdjęcia – zaokrąglone rogi */
+      .image img {
+        border-radius: 10px;
+      }
+      /* Podpisy pod zdjęciami – biały background, różowy border, zaokrąglone rogi, wyśrodkowane */
+      .caption {
+        background-color: white;
+        border: 2px solid #f79acb;
+        border-radius: 8px;
+        padding: 5px 10px;
+        display: inline-block;
+        margin: 10px auto;
+        text-align: center;
+        color: black;
+      }
+      /* Wyśrodkowanie checkboxa wraz z etykietą */
+      .field .control .checkbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Wyśrodkowanie przycisków – używamy Bulmy (klasa has-text-centered) */
+      .has-text-centered {
+        text-align: center;
+      }
+      /* Responsywność – zmniejszenie paddingu dla mniejszych ekranów */
+      @media (max-width: 600px) {
+        #step1 {
+          padding: 20px;
+          margin: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form" class="container m-4 pl-4" method="POST">
+      <!-- Etap 1: Wybór daty -->
+      <div id="top">
+        <img src="misiek3.gif" alt="Obraz walentynkowy" style="max-width:100%; height:auto;">
+      </div>
+      <div class="step" id="step1">
+        <h1 class="title">Kiedy jesteś wolna..?</h1>
+        <div class="field">
+          <div class="control">
+            <input class="input" type="date" name="availability_date" required />
+          </div>
+        </div>
+        <div class="field has-text-centered">
+          <button type="button" class="button is-primary" id="next-step1">
+            Dalej
+          </button>
+        </div>
+      </div>
+
+      <!-- Etap 2: Co jemy? -->
+      <div class="step" id="step2" style="display: none;">
+        <h1 class="title">Co jemy?</h1>
+        <div class="columns is-multiline">
+          <!-- Pozycja 1 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="sushi.jpg" alt="Meal 1" />
+            </figure>
+            <p class="caption has-text-centered">Sushi</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="Sushi" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 2 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="kfc.jpg" alt="Meal 2" />
+            </figure>
+            <p class="caption has-text-centered">Koreańskie jedzenie</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="korean-fried-chicken" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 3 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Burger.jpg" alt="Meal 3" />
+            </figure>
+            <p class="caption has-text-centered">Maczek</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="Maczek" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 4 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="pizza.jpg" alt="Meal 4" />
+            </figure>
+            <p class="caption has-text-centered">Włoska pizza</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="Pizza" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 5 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Krewetki.jpg" alt="Meal 5" />
+            </figure>
+            <p class="caption has-text-centered">Owoce morze (np. krewetki)</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="krewetki" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 6 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Kurczaki.jpg" alt="Meal 6" />
+            </figure>
+            <p class="caption has-text-centered">Kurczaki</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="kurczaki" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 7 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Salatka.jpg" alt="Meal 7" />
+            </figure>
+            <p class="caption has-text-centered">Sałatka</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="salatka" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 8 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Stek.jpg" alt="Meal 8" />
+            </figure>
+            <p class="caption has-text-centered">Stek</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="stek" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 9 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Makaron.jpg" alt="Meal 9" />
+            </figure>
+            <p class="caption has-text-centered">Makarony (np. Carbonara)</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="meal[]" value="makaron" />
+                  Select
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field has-text-centered">
+          <button type="button" class="button is-primary" id="next-step2">
+            Dalej
+          </button>
+        </div>
+      </div>
+
+      <!-- Etap 3: Co na deser? -->
+      <div class="step" id="step3" style="display: none;">
+        <h1 class="title">Co na deser?</h1>
+        <div class="columns is-multiline">
+          <!-- Pozycja 1 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="panna-cotta.jpg" alt="Dessert 1" />
+            </figure>
+            <p class="caption has-text-centered">Panna Cotta z musem malinowym</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="panna-cotta" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 2 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="creme-brule.jpg" alt="Dessert 2" />
+            </figure>
+            <p class="caption has-text-centered">Creme Brulee</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="creme-brule" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 3 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="Pucharek.jpg" alt="Dessert 3" />
+            </figure>
+            <p class="caption has-text-centered">Puchar lodowy</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="Pucharek" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 4 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="sernik.jpg" alt="Dessert 4" />
+            </figure>
+            <p class="caption has-text-centered">Sernik lotus</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="sernik" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 5 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="foundant.jpg" alt="Dessert 5" />
+            </figure>
+            <p class="caption has-text-centered">Czekoladowy lava cake</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="foundant" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 6 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="dubajska.jpg" alt="Dessert 6" />
+            </figure>
+            <p class="caption has-text-centered">Czekolada dubajska</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="dubajska" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 7 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="mochi.jpg" alt="Dessert 7" />
+            </figure>
+            <p class="caption has-text-centered">Mochi</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="mochi" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 8 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="churros.jpg" alt="Dessert 8" />
+            </figure>
+            <p class="caption has-text-centered">Churros</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="churros" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 9 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="sorbet.jpg" alt="Dessert 9" />
+            </figure>
+            <p class="caption has-text-centered">Owocowy sorbet</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="dessert[]" value="sorbet" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field has-text-centered">
+          <button type="button" class="button is-primary" id="next-step3">
+            Dalej
+          </button>
+        </div>
+      </div>
+
+      <!-- Etap 4: Co masz ochotę robić potem? -->
+      <div class="step" id="step4" style="display: none;">
+        <h1 class="title">Co masz ochotę robić potem?</h1>
+        <div class="columns is-multiline">
+          <!-- Pozycja 1 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="spacer.jpg" alt="After 1" />
+            </figure>
+            <p class="caption has-text-centered">Romantyczny spacer</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="spacer" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 2 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="maraton.jpg" alt="After 2" />
+            </figure>
+            <p class="caption has-text-centered">Filmowy maraton w domu</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="maraton" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 3 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="road trip.jpg" alt="After 3" />
+            </figure>
+            <p class="caption has-text-centered">Wypad samochodem za miasto</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="Wypad" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 4 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="kino.jpg" alt="After 4" />
+            </figure>
+            <p class="caption has-text-centered">Kino lub teatr</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="kino" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 5 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="galeria.jpg" alt="After 5" />
+            </figure>
+            <p class="caption has-text-centered">Muzeum lub galeria sztuki</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="galeria" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 6 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="masaz.jpg" alt="After 6" />
+            </figure>
+            <p class="caption has-text-centered">Długi masaż</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="masaz" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 7 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="planszowki.jpg" alt="After 7" />
+            </figure>
+            <p class="caption has-text-centered">Wieczór z planszówkami</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="planszowki" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 8 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="zachod.jpg" alt="After 8" />
+            </figure>
+            <p class="caption has-text-centered">Oglądanie zachodu słońca</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="zachod" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- Pozycja 9 -->
+          <div class="column is-one-third">
+            <figure class="image is-4by3">
+              <img src="sztuka.jpg" alt="After 9" />
+            </figure>
+            <p class="caption has-text-centered">Domowa sesja artystyczna (malowanie itd.)</p>
+            <div class="field">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="after[]" value="sztuka" />
+                  Wybierz
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field has-text-centered">
+          <button type="submit" class="button is-primary" id="final-submit">
+            Wyślij
+          </button>
+          <!-- Przycisk "Przejdź dalej" – początkowo ukryty -->
+          <button type="button" class="button is-primary" id="next-page" style="display:none;">
+            Przejdź dalej
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div id="message" style="display: none; margin: 20px; font-weight: bold; color: green; padding: 8px; background-color: beige; border-radius: 4px; border-color: aquamarine;"></div>
+
+    <!-- Skrypt sterujący przechodzeniem między etapami -->
+    <script>
+      document.getElementById("next-step1").addEventListener("click", function () {
+        var dateInput = document.querySelector('input[name="availability_date"]');
+        if (!dateInput.value) {
+          alert("Proszę wybrać datę");
+          return;
+        }
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+      });
+
+      document.getElementById("next-step2").addEventListener("click", function () {
+        var selectedMeals = document.querySelectorAll('input[name="meal[]"]:checked');
+        if (selectedMeals.length > 2) {
+          alert("Możesz zaznaczyć maksymalnie 2 pozycje w sekcji 'Co jemy?'");
+          return;
+        }
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step3").style.display = "block";
+      });
+
+      document.getElementById("next-step3").addEventListener("click", function () {
+        var selectedDesserts = document.querySelectorAll('input[name="dessert[]"]:checked');
+        if (selectedDesserts.length > 2) {
+          alert("Możesz zaznaczyć maksymalnie 2 pozycje w sekcji 'Co na deser?'");
+          return;
+        }
+        document.getElementById("step3").style.display = "none";
+        document.getElementById("step4").style.display = "block";
+      });
+    </script>
+
+    <!-- Skrypt wysyłający dane do Google Apps Script -->
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Zapobiegamy domyślnej akcji formularza
+        document.getElementById("message").textContent = "Submitting..";
+        document.getElementById("message").style.display = "block";
+        document.getElementById("final-submit").disabled = true;
+
+        // Zbieramy dane z formularza
+        var formData = new FormData(this);
+        var keyValuePairs = [];
+        for (var pair of formData.entries()) {
+          keyValuePairs.push(pair[0] + "=" + pair[1]);
+        }
+        var formDataString = keyValuePairs.join("&");
+
+        // Wysyłamy POST do Google Apps Script
+        fetch("https://script.google.com/macros/s/AKfycbwBiPgRB4Buzr8tfdj3llAtTEzyBVvCBJc2bmfl1ffO4xktxMNkxYsB46D8wz63LXci/exec", {
+          redirect: "follow",
+          method: "POST",
+          body: formDataString,
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          }
+        })
+          .then(function (response) {
+            if (response) {
+              return response;
+            } else {
+              throw new Error("Failed to submit the form.");
+            }
+          })
+          .then(function (data) {
+            // Pokazujemy alert przy pomyślnej wysyłce
+            alert("Formularz wysłany pomyślnie!");
+            document.getElementById("message").textContent = "Data submitted successfully!";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("message").style.backgroundColor = "green";
+            document.getElementById("message").style.color = "beige";
+            document.getElementById("final-submit").disabled = false;
+            // Nie resetujemy formularza, aby użytkownik mógł przejrzeć wyniki
+
+            // Pokazujemy przycisk "Przejdź dalej"
+            document.getElementById("next-page").style.display = "inline-block";
+          })
+          .catch(function (error) {
+            console.error(error);
+            document.getElementById("message").textContent = "An error occurred while submitting the form.";
+            document.getElementById("message").style.display = "block";
+          });
+      });
+
+      // Obsługa przycisku "Przejdź dalej"
+      document.getElementById("next-page").addEventListener("click", function () {
+        window.location.href = "koncowka.html";
+      });
+    </script>
+  </body>
+</html>

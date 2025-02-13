@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jesteśmy razem od...</title>
+  <style>
+    body {
+      background-color: #e2afff;
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+    }
+    /* Kontener timera z wyróżniającym się tłem i obramowaniem */
+    #timerContainer {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #c47aff; /* Inny odcień fioletu */
+      border: 3px solid #f79acb; /* Różowa obramówka */
+      border-radius: 15px;
+      display: inline-block;
+    }
+    #timerLabel {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    #timer {
+      font-size: 3rem;
+      margin-top: 10px;
+    }
+    /* Sekcja liściku miłosnego */
+    #loveLetter {
+      margin-top: 40px;
+      padding: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: justify; /* Tekst wyjustowany, ale wycentrowany */
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    /* Stylizacja przycisku */
+    button {
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    /* Przycisk "Kliknij mnie" */
+    #clickButton {
+      background-color: green;
+    }
+    /* Responsywność */
+    @media (max-width: 600px) {
+      #timerLabel {
+        font-size: 1.5rem;
+      }
+      #timer {
+        font-size: 2rem;
+      }
+      #loveLetter {
+        font-size: 1rem;
+        padding: 10px;
+      }
+      button {
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sekcja timera -->
+  <div id="timerContainer">
+    <div id="timerLabel">Jesteśmy razem od:</div>
+    <div id="timer">Ładowanie...</div>
+  </div>
+  
+  <!-- Sekcja liściku miłosnego -->
+  <div id="loveLetter">
+    Jesteś początkiem i końcem moich myśli. Jesteś powodem, dla którego codziennie się uśmiecham, czuję się żywy i pełen nadziei, i cenię każdą chwilę, którą razem spędzamy. Jesteś moją najlepszą przyjaciółką, moją partnerką, moją bratnią duszą. Dałaś mi tyle miłości i szczęścia, że nigdy nie będę w stanie Ci wystarczająco podziękować. Jesteś najpiękniejszą osobą, jaką kiedykolwiek poznałem, zarówno wewnętrznie, jak i na zewnątrz. Sprawiasz, że chcę być lepszym człowiekiem, rozwijać się razem z Tobą, wspierać Cię i cenić. Moje życie byłoby puste bez Ciebie i zawsze pragnę mieć Cię blisko. Jestem najszczęśliwszym facetem na świecie, mając Ciebie przy sobie, ponieważ jesteś najbardziej niesamowitą dziewczyną na świecie. Dałaś mi przestrzeń, w której mogę być sobą i odnaleźć błogość. Doświadczanie miłości, którą ze mną dzielisz, utwierdza mnie w przekonaniu, że prawdziwa miłość naprawdę istnieje. Doceniam, jak traktujesz mnie jak króla.
+    <br>
+    <br>
+    Pamiętaj. Seks to nie miłość, randkowanie to nie miłość, rozmawianie z kimś przez całą dobę to nie miłość. Nieprzespane noce dla kogoś to nie miłość. Miłość to ktoś, kto widzi Twoją trudną stronę i mimo to decyduje się Cię kochać. To ktoś, kto robi rzeczy za Ciebie, gdy sam nie potrafisz. Ktoś, kto obejmuje Cię i uspokaja, gdy łzy spływają po Twojej twarzy. To ktoś, kto przypomina Ci o wszystkich Twoich zaletach, kiedy widzisz tylko wady. To ktoś, kto dba o to, byś była w porządku. To ktoś, kto myśli o Tobie każdego dnia. Ktoś, kto jest nieustannie oddany Tobie. Jesteś... moją miłością.
+    <br>
+    <br>
+    Jesteś jedyną osobą, którą kiedykolwiek chcę nazwać moją Walentynką. Kocham Cię najmocniej na świecie.
+  </div>
+
+  <!-- Przycisk przekierowujący do kolejnej strony -->
+  <button id="clickButton">Przejdź dalej</button>
+  
+  <script>
+    function updateTimer() {
+      // Data początkowa: 8 sierpnia 2022, godzina 18:25
+      const start = new Date("2022-08-08T18:25:00");
+      const now = new Date();
+      
+      let years = now.getFullYear() - start.getFullYear();
+      let months = now.getMonth() - start.getMonth();
+      let days = now.getDate() - start.getDate();
+      let hours = now.getHours() - start.getHours();
+      let minutes = now.getMinutes() - start.getMinutes();
+      let seconds = now.getSeconds() - start.getSeconds();
+      
+      // Korekta ujemnych wartości
+      if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+      }
+      if (minutes < 0) {
+        minutes += 60;
+        hours--;
+      }
+      if (hours < 0) {
+        hours += 24;
+        days--;
+      }
+      if (days < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+        months--;
+      }
+      if (months < 0) {
+        months += 12;
+        years--;
+      }
+      
+      // Aktualizacja treści timera
+      document.getElementById('timer').textContent =
+        years + " lat " +
+        months + " miesięcy " +
+        days + " dni " +
+        hours + " godzin " +
+        minutes + " minut " +
+        seconds + " sekund";
+    }
+    
+    // Uruchomienie i aktualizacja timera co sekundę
+    updateTimer();
+    setInterval(updateTimer, 1000);
+    
+    // Obsługa przycisku przekierowującego do kolejnej strony
+    document.getElementById('clickButton').addEventListener('click', function() {
+      window.location.href = "nextpage2.html";
+    });
+  </script>
+</body>
+</html>
